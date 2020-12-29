@@ -2,7 +2,7 @@ const { TEST, NAME } = require('./types');
 
 const initialState = {
   testState: {
-    someData: 'Some Data'
+    someData: 'Some Data',
   },
   anotherState: {
     data: 'Another state data'
