@@ -1,12 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Test from './pages/testPage';
+import Provider from './provider';
+import store from './redux/store'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <div>hello</div>
+      <Test testProp={'test'} />  
+    </Provider>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );
