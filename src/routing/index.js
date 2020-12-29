@@ -4,7 +4,6 @@ import TestPage from '../pages/testPage';
 import TestPage1 from '../pages/testPage1';
 
 export default function Routing() {
-    console.log('rooter')
     return (
         <React.Fragment>
             <Switch>

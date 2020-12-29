@@ -5,7 +5,6 @@ import { testAction } from '../redux/actions';
 
 const Test = (props) => {
   const handleClick = () => props.testAction('from test page');
-  console.log(props)
   return (
     <div>
       <h1>TEST COMPONENT</h1>

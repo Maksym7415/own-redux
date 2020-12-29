@@ -20,7 +20,6 @@ function Provider({store, children}) {
 
   return (
     <>
-    {console.log(store, children)}
       <Context.Provider value={{...store, ...contextValue}}>{<children.type/>}</Context.Provider>
     </>
   )
