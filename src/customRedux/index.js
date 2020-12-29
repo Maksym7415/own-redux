@@ -54,8 +54,7 @@ export function createStore(reducer) {
 }
 
 // dispatch method
-export function dispatch(action) {
-  store.dispatch(action)
-}
+
+export const dispatch = (action) => store.dispatch(action);
 
 export const state = store.getState();
