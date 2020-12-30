@@ -3,25 +3,21 @@ import { state } from '../customRedux';
 import Context from './context';
 
 function Provider({store, children}) {
-  const [localState, setLocalState] = useState(0);
+  // const [localState, setLocalState] = useState(0);
 
 
-  const contextValue = useMemo(() => {
-    return {
-      rerender: () => {
-        setLocalState((prev) => ++prev)
-      }
-    }
-  }, [store]);
-
-  useEffect(() => {
-    store.subscribe = contextValue.rerender
-  }, [contextValue]);
-  console.log(children)
+  // const contextValue = useMemo(() => {
+  //   return {
+  //     rerender: () => {
+  //       setLocalState((prev) => ++prev)
+  //     }
+  //   }
+  // }, [store]);
 
   return (
     <>
-      <Context.Provider value={{...store, ...contextValue}}>{<children.type/>}</Context.Provider>
+    {children}
+      {/* <Context.Provider value={{...store, ...contextValue}}>{<children.type/>}</Context.Provider> */}
     </>
   )
 }

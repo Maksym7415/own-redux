@@ -9,7 +9,7 @@ function TestPage1(props) {
         <div>
             <p>{props.data}</p>
             <button onClick={() => props.testAction('from test page 1')}>get data</button>
-            <Link to='/test-page'>test-page</Link>
+            {/* <Link to='/test-page'>test-page</Link> */}
         </div>
     )
 }

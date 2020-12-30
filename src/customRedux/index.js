@@ -19,6 +19,11 @@ class Redux {
 
   #reducer = {}; // initial reducers object
   #state = {}; // initial state object
+  #subscriptions = []; // store subscriptions
+
+  subscribe(state, callback) {
+    this.#subscriptions.push(callback)
+  };
 
   // initializing reducers and states
   createReducer(reducer) {
@@ -28,14 +33,15 @@ class Redux {
     }
   }
 
-  subscribe
+  // subscribe
 
   // changing states
-  dispatch(action) {
+  dispatch(action, cb) {
     for (let key in this.#reducer) {
       this.#state[key] = this.#reducer[key](this.#state[key], action)
     }
-    this.subscribe && this.subscribe()
+    // this.subscribe && this.subscribe()
+    this.#subscriptions.forEach((cb) => cb())
   }
 
   // states getter
@@ -45,7 +51,7 @@ class Redux {
 }
 
 // creating store instance
-const store = Redux.getInstance();
+export const store = Redux.getInstance();
 
 // initializing reducers
 export function createStore(reducer) {

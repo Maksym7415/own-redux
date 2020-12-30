@@ -11,7 +11,7 @@ const Test = (props) => {
       <h1>TEST COMPONENT</h1>
       <div>{props.testData}</div>
       <button onClick={handleClick}>Click</button>
-      <Link to='/test-page1'>test-page1</Link>
+      {/* <Link to='/test-page1'>test-page1</Link> */}
     </div>
   )
 }
