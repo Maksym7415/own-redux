@@ -5,6 +5,7 @@ import { testAction } from '../redux/actions';
 
 const Test = (props) => {
   const handleClick = () => props.testAction('from test page');
+  console.log('testPage')
   return (
     <div>
       <h1>TEST COMPONENT</h1>
@@ -14,7 +15,7 @@ const Test = (props) => {
     </div>
   )
 }
-export default connect((state) => ({testData: state?.someReducer?.testState?.someData}), {testAction})(Test);
+export default connect((state) => ({testData: state?.someReducer?.anotherState?.data}), {testAction})(Test);
 
 
 // testData: state?.someReducer?.testState?.someData

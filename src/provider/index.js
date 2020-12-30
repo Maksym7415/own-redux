@@ -17,6 +17,7 @@ function Provider({store, children}) {
   useEffect(() => {
     store.subscribe = contextValue.rerender
   }, [contextValue]);
+  console.log(children)
 
   return (
     <>
