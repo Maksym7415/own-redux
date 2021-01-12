@@ -4,8 +4,9 @@ import local from './local';
 import googleIcon from './images/google.png';
 import appleIcon from './images/apple.jpg';
 
-const GooglePay = ({ clientSecret }) => {
-  const [lang] = useState('en')
+function GooglePay ({ clientSecret }) {
+
+  const [lang] = useState('en');
   const stripe = useStripe();
   const [paymentRequest, setPaymentRequest] = useState(null);
   const [isShowButton, setIsShowButton] = useState(false);
@@ -24,10 +25,10 @@ const GooglePay = ({ clientSecret }) => {
         },
         requestPayerName: true,
         requestPayerEmail: true,
-      });
+      })
       console.log('get pr', pr)
       // Check the availability of the Payment Request API.
-      pr.canMakePayment().then(result => {
+      pr.canMakePayment().then((result) => {
         console.log('paymentReq check availeable', result)
         if (result) {
           setIsShowButton(true)
@@ -95,7 +96,7 @@ const GooglePay = ({ clientSecret }) => {
                   <span className="default">
                       <img alt='google-icon' className='google-apple-button-icon' src={appleIcon}></img>
                   </span>
-                  <span>Pay</span>
+                  <span>{local[lang].payButtonText}</span>
                 </button>
               )
             : (
@@ -103,7 +104,7 @@ const GooglePay = ({ clientSecret }) => {
                 <span className="default">
                     <img alt='apple-icon' className='google-apple-button-icon' src={googleIcon}></img>
                 </span>
-                <span>Pay</span>
+                <span>{local[lang].payButtonText}</span>
               </button>
             )  
         }

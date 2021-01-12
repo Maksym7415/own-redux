@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import BotArrow from '../../components/bottomArrow';
+import BotArrow from './bottomArrow';
 
 export default function StripeSelect({ data, label, value, onChange }) {
 

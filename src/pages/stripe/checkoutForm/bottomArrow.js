@@ -1,5 +1,5 @@
 import React from 'react';
-import BottomArrow from '../media/bottomArrow.svg'
+import BottomArrow from '../images/bottomArrow.svg'
 
 export default function BotArrow() {
     return (

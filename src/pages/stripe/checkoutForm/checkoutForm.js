@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
 import {CardNumberElement, CardExpiryElement, CardCvcElement, useElements, useStripe} from '@stripe/react-stripe-js';
 import StripeField from './stripeField';
-import CvcPicture from '../../components/cvcPicture';
+import CvcPicture from './cvcPicture';
 import StripeSelect from './stripeSelect';
-import countriesList from '../../data/countriesList';
-import local from './local';
+import countriesList from '../../../data/countriesList';
+import local from '../local';
 
-function Card({ clientSecret }) {
+const defaultState = {
+  email: '',
+  name: '',
+  address: {
+    country: ''
+  }
+};
+
+function CheckoutForm({ clientSecret }) {
   const [lang] = useState('en');
 
-  const [billingDetails, setBillingDetails] = useState({
-    email: '',
-    name: '',
-    address: {
-      country: ''
-    }
-  });
+  const [billingDetails, setBillingDetails] = useState({ ...defaultState });
   const [cardComplete, setCardComplete] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
 
@@ -34,6 +37,7 @@ function Card({ clientSecret }) {
     let result;
 
     if (card) {
+      setIsDisabled(true);
       result = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card,
@@ -46,8 +50,11 @@ function Card({ clientSecret }) {
       if (result.error) {
         // Show error to your customer (e.g., insufficient funds)
         console.log('error', result.error)
+        setIsDisabled(false);
       };
-      console.log('success')
+      console.log('success');
+      setBillingDetails(defaultState);
+      setIsDisabled(false);
     }
   };
 
@@ -112,11 +119,11 @@ function Card({ clientSecret }) {
                     data={countriesList}
                     label={local[lang].country}
                     value={billingDetails.address.country}
-                    onChange={(country) => setBillingDetails({...billingDetails, address: {...billingDetails.address, country}})}
+                    onChange={(country) => setBillingDetails({ ...billingDetails, address: { ...billingDetails.address, country } })}
                   />
                 </div>
                 <div className='p-8'>
-                  <button className='SubmitButton SubmitButton--incomplete'  type="submit">{local[lang].payButtonText}</button>
+                  <button className='SubmitButton SubmitButton--incomplete' disabled={isDisabled} type="submit">{local[lang].payButtonText}</button>
                 </div>
              
             </div>
@@ -126,4 +133,4 @@ function Card({ clientSecret }) {
   );
 };
 
-export default Card;
+export default CheckoutForm;

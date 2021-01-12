@@ -1,5 +1,5 @@
 import React from 'react';
-import CvcPicture from '../media/cvv.svg'
+import CvcPicture from '../images/cvv.svg'
 
 export default function Cvc() {
     return (
