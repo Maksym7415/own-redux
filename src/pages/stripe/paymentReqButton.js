@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {PaymentRequestButtonElement, useStripe} from '@stripe/react-stripe-js';
 
-const CheckoutForm = () => {
+const GooglePay = () => {
   const stripe = useStripe();
   const [paymentRequest, setPaymentRequest] = useState(null);
 
@@ -17,10 +17,10 @@ const CheckoutForm = () => {
         requestPayerName: true,
         requestPayerEmail: true,
       });
-      setPaymentRequest(pr)
+      console.log('get pr', pr)
       // Check the availability of the Payment Request API.
       pr.canMakePayment().then(result => {
-        console.log(result)
+        console.log('paymentReq check availeable', result)
         if (result) {
           setPaymentRequest(pr);
         }
@@ -34,7 +34,7 @@ const CheckoutForm = () => {
   }
 
   // Use a traditional checkout form.
-  return 'Insert your form or button component here.';
+  return 'Google pay is not working';
 }
 
-export default CheckoutForm
+export default GooglePay
