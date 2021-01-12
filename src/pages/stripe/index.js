@@ -3,7 +3,7 @@ import { loadStripe } from '@stripe/stripe-js';
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-const stripePromise = loadStripe('YOUR pk_test key');
+const stripePromise = loadStripe('pk_test_51HGjVfCcIG0MPJSGSyEcBP3PyICKdRKpXMC1TP4r08nXQ6diqfdIN4Uw3O5c1vdgEqc7deyecbDYde46HdRMdVtt00trU2DOSP');
 
 function Stripe() {
 
@@ -12,7 +12,7 @@ function Stripe() {
     const stripe = await stripePromise;
 
     // Call your backend to create the Checkout Session
-    const url = 'YOUR CREATE INSTANCE URL'
+    const url = 'https://eat-beat.hopto.org/sandbox/create-session'
     const body = JSON.stringify({
       name: 'Jon Dow',
       currency: 'usd',
