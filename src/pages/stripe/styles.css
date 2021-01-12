@@ -6,6 +6,14 @@ p {
   margin: 0
 }
 
+.inline-block {
+  display: inline-block;
+}
+
+.disp-none {
+  display: none;
+}
+
 .mainContainer {
   width: 400px;
   display: flex;

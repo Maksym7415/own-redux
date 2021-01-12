@@ -6,6 +6,9 @@ const GooglePay = ({ clientSecret }) => {
   const [lang] = useState('en')
   const stripe = useStripe();
   const [paymentRequest, setPaymentRequest] = useState(null);
+  const [isShowButton, setIsShowButton] = useState(false);
+
+  const handleClick = (paymentRequest) => paymentRequest.show();
 
   const options = {
     style: {
@@ -41,12 +44,15 @@ const GooglePay = ({ clientSecret }) => {
       pr.canMakePayment().then(result => {
         console.log('paymentReq check availeable', result)
         if (result) {
-          pr.update({
-            total: {
-              label: 'Pay',
-            }
-          });
+          setIsShowButton(true)
           setPaymentRequest(pr);
+
+          if (result.applePay) {
+            // button.className = 'btn btn-dark';
+            // button.style.backgroundColor = '#000';
+            // button.querySelector('.default').style.display = 'none';
+            // button.querySelector('.applepay').style.display = 'inline';
+        }
         }
       });
     }
@@ -99,7 +105,19 @@ const GooglePay = ({ clientSecret }) => {
   if (paymentRequest) {
     return (
       <div className='apple-pay-button-container'>
-      <PaymentRequestButtonElement options={{...options, paymentRequest}} />
+        <button onClick={() => handleClick(paymentRequest)} type="button" className={isShowButton ? 'inline-block' : 'disp-none'}>
+          <span className="default">
+              <i className="fas fa-lg fa-credit-card"></i>
+              Pay Now
+          </span>
+          <span className="applepay ml-4 mr-4" style={{display: 'none'}}>
+              <span className="fa-lg">
+                  <i className="fab fa-apple-pay" data-fa-transform="grow-12"></i>
+              </span>
+              <span className="sr-only">Purchase with Apple Pay</span>
+          </span>
+      </button>
+      {/* <PaymentRequestButtonElement options={{...options, paymentRequest}} /> */}
       <div className='content-divider'>
         <div className='flex-setting divider-line'></div>
         <div className='flex-setting'>{local[lang].dividerText}</div>
@@ -113,4 +131,4 @@ const GooglePay = ({ clientSecret }) => {
   return 'Google pay is not working';
 }
 
-export default GooglePay
+export default GooglePay;
