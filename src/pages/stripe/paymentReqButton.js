@@ -7,25 +7,9 @@ const GooglePay = ({ clientSecret }) => {
   const stripe = useStripe();
   const [paymentRequest, setPaymentRequest] = useState(null);
   const [isShowButton, setIsShowButton] = useState(false);
+  const [isAppleButton, setIsAppleButton] = useState(false)
 
   const handleClick = (paymentRequest) => paymentRequest.show();
-
-  const options = {
-    style: {
-      paymentRequestButton: {
-        type: 'default',
-        // One of 'default', 'book', 'buy', or 'donate'
-        // Defaults to 'default'
-  
-        theme: 'dark',
-        // One of 'dark', 'light', or 'light-outline'
-        // Defaults to 'dark'
-  
-        // height: '64px',
-        // Defaults to '40px'. The width is always '100%'.
-      },
-    }
-  }
 
   useEffect(() => {
     if (stripe) {
@@ -48,10 +32,7 @@ const GooglePay = ({ clientSecret }) => {
           setPaymentRequest(pr);
 
           if (result.applePay) {
-            // button.className = 'btn btn-dark';
-            // button.style.backgroundColor = '#000';
-            // button.querySelector('.default').style.display = 'none';
-            // button.querySelector('.applepay').style.display = 'inline';
+            setIsAppleButton(true);
         }
         }
       });
@@ -105,7 +86,7 @@ const GooglePay = ({ clientSecret }) => {
   if (paymentRequest) {
     return (
       <div className='apple-pay-button-container'>
-        <button onClick={() => handleClick(paymentRequest)} type="button" className={isShowButton ? 'inline-block' : 'disp-none'}>
+        <button onClick={() => handleClick(paymentRequest)} className={isShowButton ? 'google-button inline-block' : 'disp-none'}>
           <span className="default">
               <i className="fas fa-lg fa-credit-card"></i>
               Pay Now
