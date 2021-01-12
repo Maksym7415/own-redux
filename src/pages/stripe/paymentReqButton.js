@@ -18,7 +18,7 @@ const GooglePay = ({ clientSecret }) => {
         // One of 'dark', 'light', or 'light-outline'
         // Defaults to 'dark'
   
-        height: '64px',
+        // height: '64px',
         // Defaults to '40px'. The width is always '100%'.
       },
     }

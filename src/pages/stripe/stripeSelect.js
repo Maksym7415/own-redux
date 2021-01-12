@@ -30,7 +30,7 @@ export default function StripeSelect({ data, label, value, onChange }) {
             <label style={{color: 'rgba(26,26,26,.7)', fontWeight: 500, fontSize: '13px'}}>
                 {label}
             </label>
-            <div className='StripeElement' >
+            <div className='StripeElementCustom' >
                 <div style={{padding: '3px'}}>
                     <div onClick={open} style={{display: 'flex', justifyContent: data.find((el) => el.code === value)?.name ? 'space-between' : 'flex-end'}}>
                     <span style={{fontSize: '13px'}}>{data.find((el) => el.code === value)?.name}</span>

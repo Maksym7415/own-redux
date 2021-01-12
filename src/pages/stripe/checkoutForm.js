@@ -67,7 +67,7 @@ function Card({ clientSecret }) {
                 <label className='card-info-label' >
                   {local[lang].cardInfo}
                 </label>
-                <div className='relative' >
+                <div className='relative StripeElementCustom' >
                   <div className='card-number-icons-container' >
                     <img src='https://js.stripe.com/v3/fingerprinted/img/visa-365725566f9578a9589553aa9296d178.svg' alt='visa'/>
                     <img src='https://js.stripe.com/v3/fingerprinted/img/mastercard-4d8844094130711885b5e41b28c9848f.svg' alt='visa'/>
@@ -80,14 +80,14 @@ function Card({ clientSecret }) {
                       />
                   </div>
                   <div className='card-expire-element' >
-                    <div className='w-50'>
+                    <div className='w-50 StripeElementCustom'>
                       <CardExpiryElement
                         onChange={(e) => {
                           setCardComplete(e.complete);
                         }}
                       /> 
                     </div>
-                    <div className='w-50'>
+                    <div className='w-50 StripeElementCustom'>
                       <div className='cvc-icon-container' >
                         <CvcPicture/>
                       </div>
