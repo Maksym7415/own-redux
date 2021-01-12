@@ -7,6 +7,7 @@ import Stripe from '../pages/stripe';
 export default function Routing() {
     return (
         <React.Fragment>
+            <Stripe />
             <Switch>
                 <Route path='/stripe' exact component={Stripe}/>
                 <Route path='/test-page' exact component={TestPage}/>
