@@ -8,8 +8,8 @@ const GooglePay = ({ clientSecret }) => {
   const [lang] = useState('en')
   const stripe = useStripe();
   const [paymentRequest, setPaymentRequest] = useState(null);
-  const [isShowButton, setIsShowButton] = useState(true);
-  const [isAppleButton, setIsAppleButton] = useState(true)
+  const [isShowButton, setIsShowButton] = useState(false);
+  const [isAppleButton, setIsAppleButton] = useState(false)
 
   const handleClick = (paymentRequest) => paymentRequest.show();
 
@@ -85,7 +85,7 @@ const GooglePay = ({ clientSecret }) => {
     }
   }, [paymentRequest]) 
 
-  // if (paymentRequest) {
+  if (paymentRequest) {
     return (
       <div className='apple-pay-button-container'>
         {
@@ -114,7 +114,7 @@ const GooglePay = ({ clientSecret }) => {
       </div>
       </div>
     )  
-  // }
+  }
 
   // Use a traditional checkout form.
   return 'Google pay is not working';
