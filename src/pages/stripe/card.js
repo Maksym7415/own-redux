@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {CardElement, CardNumberElement, CardExpiryElement, CardCvcElement, useElements, useStripe} from '@stripe/react-stripe-js';
 import StripeField from './stripeField';
-import './styles.css';
 import CvcPicture from '../../components/cvcPicture';
 import StripeSelect from './stripeSelect';
 import countriesList from '../../data/countriesList'

@@ -5,6 +5,23 @@ const GooglePay = ({ clientSecret }) => {
   const stripe = useStripe();
   const [paymentRequest, setPaymentRequest] = useState(null);
 
+  const options = {
+    style: {
+      paymentRequestButton: {
+        type: 'default',
+        // One of 'default', 'book', 'buy', or 'donate'
+        // Defaults to 'default'
+  
+        theme: 'dark',
+        // One of 'dark', 'light', or 'light-outline'
+        // Defaults to 'dark'
+  
+        height: '64px',
+        // Defaults to '40px'. The width is always '100%'.
+      },
+    }
+  }
+
   useEffect(() => {
     if (stripe) {
       const pr = stripe.paymentRequest({
@@ -73,7 +90,7 @@ const GooglePay = ({ clientSecret }) => {
   }, [paymentRequest]) 
 
   if (paymentRequest) {
-    return <PaymentRequestButtonElement options={{paymentRequest}} />
+    return <PaymentRequestButtonElement className='GooglePayButton' options={{...options, paymentRequest}} />
   }
 
   // Use a traditional checkout form.

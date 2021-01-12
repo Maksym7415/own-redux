@@ -72,3 +72,16 @@ p {
     background-color: #38a4fc;
     color: #fff
   }
+
+  .GooglePayButton {
+    min-height: 32px;
+    max-height: 64px;
+    padding: 30vh 15vw 25vh;
+    background-origin: content-box;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: 0;
+    border-radius: 10vh;
+    cursor: pointer;
+}
