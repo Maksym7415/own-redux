@@ -41,6 +41,11 @@ const GooglePay = ({ clientSecret }) => {
       pr.canMakePayment().then(result => {
         console.log('paymentReq check availeable', result)
         if (result) {
+          paymentRequest.update({
+            total: {
+              label: 'Pay',
+            }
+          });
           setPaymentRequest(pr);
         }
       });
@@ -93,7 +98,7 @@ const GooglePay = ({ clientSecret }) => {
 
   if (paymentRequest) {
     return (
-      <div>
+      <div className='apple-pay-button-container'>
       <PaymentRequestButtonElement options={{...options, paymentRequest}} />
       <div className='content-divider'>
         <div className='flex-setting divider-line'></div>
