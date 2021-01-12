@@ -41,7 +41,7 @@ const GooglePay = ({ clientSecret }) => {
       pr.canMakePayment().then(result => {
         console.log('paymentReq check availeable', result)
         if (result) {
-          paymentRequest.update({
+          pr.update({
             total: {
               label: 'Pay',
             }
