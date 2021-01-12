@@ -41,9 +41,11 @@ export default function PaymentForm({ clientSecret }) {
   }, [stripe])
 
   return (
-    <form className='stripeCardContainer' onSubmit={handleSubmit}>
+    <>
+     {/* <form className='stripeCardContainer' onSubmit={handleSubmit}> */}
       <Card />
       <button color="primary">Confirm order</button>
-    </form>
+     {/* </form> */}
+    </>
   );
 }

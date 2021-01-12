@@ -1,9 +1,10 @@
 import React from 'react';
 import { loadStripe } from '@stripe/stripe-js';
-
+import { Elements } from '@stripe/react-stripe-js';
+import PaymentForm from './paymentForm'
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
-const stripePromise = loadStripe('YOUR pk_test key');
+const stripePromise = loadStripe('pk_test_51HGjVfCcIG0MPJSGSyEcBP3PyICKdRKpXMC1TP4r08nXQ6diqfdIN4Uw3O5c1vdgEqc7deyecbDYde46HdRMdVtt00trU2DOSP');
 
 function Stripe() {
 
@@ -12,7 +13,7 @@ function Stripe() {
     const stripe = await stripePromise;
 
     // Call your backend to create the Checkout Session
-    const url = 'YOUR CREATE INSTANCE URL'
+    const url = 'http://localhost:8000/create-session'
     const body = JSON.stringify({
       name: 'Jon Dow',
       currency: 'usd',
@@ -45,9 +46,13 @@ function Stripe() {
 
   return (
     <>
-      <button role="link" onClick={handleClick}>
+    <Elements stripe={stripePromise}>
+    <PaymentForm />
+    </Elements>
+
+      {/* <button role="link" onClick={handleClick}>
         Checkout
-      </button>
+      </button> */}
     </>
   );
 }
