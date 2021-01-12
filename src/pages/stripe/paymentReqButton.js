@@ -90,7 +90,7 @@ const GooglePay = ({ clientSecret }) => {
   }, [paymentRequest]) 
 
   if (paymentRequest) {
-    return <PaymentRequestButtonElement className='GooglePayButton' options={{...options, paymentRequest}} />
+    return <PaymentRequestButtonElement options={{...options, paymentRequest}} />
   }
 
   // Use a traditional checkout form.
