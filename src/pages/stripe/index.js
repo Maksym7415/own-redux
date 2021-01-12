@@ -1,22 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
-import CheckoutForm from './paymentForm';
+import CheckoutForm from './card';
 import GooglePay from './paymentReqButton';
 
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
 const stripePromise = loadStripe('pk_test_51HGjVfCcIG0MPJSGSyEcBP3PyICKdRKpXMC1TP4r08nXQ6diqfdIN4Uw3O5c1vdgEqc7deyecbDYde46HdRMdVtt00trU2DOSP');
 
 function Stripe() {
+  const [clientSecret, setClientSecret] = useState();
+
+  useEffect(() => {
+    const url = 'http://localhost:8000/sandbox/apple-pay-create-session'
+    const body = JSON.stringify({
+      currency: 'usd',
+      amount: 200,
+    })
+    fetch(url, { 
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body
+    })
+      .then((res) => res.json())
+      .then((res) => setClientSecret(res.clientSecret))
+      .catch((err) => console.log(err));
+  }, []);
+  console.log(clientSecret)
 
   return (
-    <>
     <Elements stripe={stripePromise}>
-      <GooglePay />
-      <CheckoutForm />
-    </Elements>
-    </>
+      {clientSecret && <GooglePay clientSecret={clientSecret} />}
+      {clientSecret && <CheckoutForm clientSecret={clientSecret} />}
+    </Elements>  
   );
 }
 

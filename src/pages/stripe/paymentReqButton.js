@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {PaymentRequestButtonElement, useStripe} from '@stripe/react-stripe-js';
 
-const GooglePay = () => {
+const GooglePay = ({ clientSecret }) => {
   const stripe = useStripe();
   const [paymentRequest, setPaymentRequest] = useState(null);
-  const [clientSecret, setClientSecret] = useState(null)
 
   useEffect(() => {
     if (stripe) {
@@ -29,23 +28,23 @@ const GooglePay = () => {
     }
   }, [stripe]);
 
-  useEffect(() => {
-    const url = 'http://localhost:8000/create-session'
-    const body = JSON.stringify({
-      currency: 'usd',
-      amount: 200,
-    })
-    fetch(url, { 
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body
-    })
-      .then((res) => res.json)
-      .then((res) => setClientSecret(res.clientSecret))
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   const url = 'http://localhost:8000/create-session'
+  //   const body = JSON.stringify({
+  //     currency: 'usd',
+  //     amount: 200,
+  //   })
+  //   fetch(url, { 
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body
+  //   })
+  //     .then((res) => res.json)
+  //     .then((res) => setClientSecret(res.clientSecret))
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   useEffect(() => {
     if (paymentRequest) {
@@ -62,10 +61,12 @@ const GooglePay = () => {
           // re-show the payment interface, or show an error message and close
           // the payment interface.
           ev.complete('fail');
+          console.log('error')
         } else {
           // Report to the browser that the confirmation was successful, prompting
           // it to close the browser payment method collection interface.
           ev.complete('success');
+          console.log('success')
           // Check if the PaymentIntent requires any actions and if so let Stripe.js
           // handle the flow. If using an API version older than "2019-02-11" instead
           // instead check for: `paymentIntent.status === "requires_source_action"`.
@@ -74,11 +75,14 @@ const GooglePay = () => {
             const {error} = await stripe.confirmCardPayment(clientSecret);
             if (error) {
               // The payment failed -- ask your customer for a new payment method.
+              console.log('error')
             } else {
               // The payment has succeeded.
+              console.log('success')
             }
           } else {
             // The payment has succeeded.
+            console.log('success')
           }
         }
       });
