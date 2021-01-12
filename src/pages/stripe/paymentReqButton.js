@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {PaymentRequestButtonElement, useStripe} from '@stripe/react-stripe-js';
+import local from './local';
 
 const GooglePay = ({ clientSecret }) => {
+  const [lang] = useState('en')
   const stripe = useStripe();
   const [paymentRequest, setPaymentRequest] = useState(null);
 
@@ -90,7 +92,16 @@ const GooglePay = ({ clientSecret }) => {
   }, [paymentRequest]) 
 
   if (paymentRequest) {
-    return <PaymentRequestButtonElement options={{...options, paymentRequest}} />
+    return (
+      <div>
+      <PaymentRequestButtonElement options={{...options, paymentRequest}} />
+      <div className='content-divider'>
+        <div className='flex-setting divider-line'></div>
+        <div className='flex-setting'>{local[lang].dividerText}</div>
+        <div className='flex-setting divider-line'></div>
+      </div>
+      </div>
+    )  
   }
 
   // Use a traditional checkout form.

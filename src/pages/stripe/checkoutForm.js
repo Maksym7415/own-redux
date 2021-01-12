@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import {CardElement, CardNumberElement, CardExpiryElement, CardCvcElement, useElements, useStripe} from '@stripe/react-stripe-js';
+import {CardNumberElement, CardExpiryElement, CardCvcElement, useElements, useStripe} from '@stripe/react-stripe-js';
 import StripeField from './stripeField';
 import CvcPicture from '../../components/cvcPicture';
 import StripeSelect from './stripeSelect';
-import countriesList from '../../data/countriesList'
+import countriesList from '../../data/countriesList';
+import local from './local';
 
 function Card({ clientSecret }) {
+  const [lang] = useState('en');
+
   const [billingDetails, setBillingDetails] = useState({
     email: '',
     name: '',
@@ -49,24 +52,23 @@ function Card({ clientSecret }) {
   };
 
   return (
-    <div>
-    <div style={{width: '380px', margin: '0 auto', padding: '10% 40%'}}>
+    <div className='checkout-form-container'>
            <form onSubmit={handleSubmit}>
             <div>
                 <div className='p-8'>
                     <StripeField
                       placeholder=""
-                      label='Эл. почта'
+                      label={local[lang].email}
                       value={billingDetails.email}
                       onChange={(event) => setBillingDetails({...billingDetails, email: event.target.value})}
                     />
                 </div>
               <div className='p-8'>
-                <label style={{color: 'rgba(26,26,26,.7)', fontWeight: 500, fontSize: '13px'}}>
-                  Данные карты
+                <label className='card-info-label' >
+                  {local[lang].cardInfo}
                 </label>
-                <div  style={{position: 'relative'}}>
-                  <div style={{display: 'flex', position: 'absolute', right: '-15px', bottom: '10px', justifyContent: 'space-evenly', width: '90px'}}>
+                <div className='relative' >
+                  <div className='card-number-icons-container' >
                     <img src='https://js.stripe.com/v3/fingerprinted/img/visa-365725566f9578a9589553aa9296d178.svg' alt='visa'/>
                     <img src='https://js.stripe.com/v3/fingerprinted/img/mastercard-4d8844094130711885b5e41b28c9848f.svg' alt='visa'/>
                     <img src='https://js.stripe.com/v3/fingerprinted/img/amex-a49b82f46c5cd6a96a6e418a6ca1717c.svg' alt='visa'/>
@@ -77,16 +79,16 @@ function Card({ clientSecret }) {
                       }}
                       />
                   </div>
-                  <div style={{display: 'flex', position: 'relative'}}>
-                    <div style={{width: '50%'}}>
+                  <div className='card-expire-element' >
+                    <div className='w-50'>
                       <CardExpiryElement
                         onChange={(e) => {
                           setCardComplete(e.complete);
                         }}
                       /> 
                     </div>
-                    <div style={{width: '50%'}}>
-                      <div style={{display: 'flex', position: 'absolute', right: '-17px', bottom: '5px'}}>
+                    <div className='w-50'>
+                      <div className='cvc-icon-container' >
                         <CvcPicture/>
                       </div>
                       <CardCvcElement
@@ -100,7 +102,7 @@ function Card({ clientSecret }) {
                 <div className='p-8'>
                   <StripeField
                     placeholder=""
-                    label='Имя и фамилия, указанные на карте'
+                    label={local[lang].name}
                     value={billingDetails.name}
                     onChange={(event) => setBillingDetails({...billingDetails, name: event.target.value})}
                   />
@@ -108,19 +110,18 @@ function Card({ clientSecret }) {
                 <div className='p-8'>
                   <StripeSelect 
                     data={countriesList}
-                    label={'Страна или регион'}
+                    label={local[lang].country}
                     value={billingDetails.address.country}
                     onChange={(country) => setBillingDetails({...billingDetails, address: {...billingDetails.address, country}})}
                   />
                 </div>
                 <div className='p-8'>
-                  <button className='SubmitButton SubmitButton--incomplete'  type="submit">Pay</button>
+                  <button className='SubmitButton SubmitButton--incomplete'  type="submit">{local[lang].payButtonText}</button>
                 </div>
              
             </div>
       </form>
       
-    </div>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
-import CheckoutForm from './card';
+import CheckoutForm from './checkoutForm';
 import GooglePay from './paymentReqButton';
 import './styles.css'
 
@@ -33,8 +33,8 @@ function Stripe() {
     <Elements stripe={stripePromise}>
       {
         clientSecret 
-          ? <div>
-              <GooglePay clientSecret={clientSecret} />
+          ? <div className='mainContainer'>
+              <GooglePay clientSecret={clientSecret} />              
               <CheckoutForm clientSecret={clientSecret} />
             </div>
           : <div>Your action by loading payment intent</div>

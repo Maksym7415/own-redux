@@ -1,13 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import BotArrow from '../../components/bottomArrow';
 
-import './styles.css';
-
 export default function StripeSelect({ data, label, value, onChange }) {
 
     const ref = useRef(null)
     const [show, setShow] = useState(false);
-    const [country, setCountry] = useState({});
 
     const blurHandler = (event) => {
         if (event.currentTarget.contains(event.relatedTarget)) return;
@@ -21,10 +18,6 @@ export default function StripeSelect({ data, label, value, onChange }) {
     const getCountry = (code) => {
         setShow(false);
         const currentCountry = data.find((el) => el.code === code)
-        setCountry({
-            name: currentCountry.name,
-            code: currentCountry.code
-        })
         onChange(currentCountry.code)
     }
 
@@ -44,7 +37,7 @@ export default function StripeSelect({ data, label, value, onChange }) {
                         <BotArrow/>
                     </div>
                 </div>
-                {show && <div onBlur={blurHandler} style={{width: '100%', maxHeight: '400px', overflow: 'auto', position: 'absolute', zIndex: 100, backgroundColor: '#fff', bottom: '40px', outline: 'none', border: '0.5px solid #80808099'}} tabIndex={1} ref={ref}>
+                {show && <div onBlur={blurHandler} style={{width: '100%', maxHeight: '300px', overflow: 'auto', position: 'absolute', zIndex: 100, backgroundColor: '#fff', bottom: '40px', outline: 'none', border: '0.5px solid #80808099'}} tabIndex={1} ref={ref}>
                     <div  style={{padding: '0px 0px 0px 12px'}}>
                         {data.map(({ code, name }) => <p key={code} className='country' onClick={() => getCountry(code)}>{name}</p>)}
                     </div>
