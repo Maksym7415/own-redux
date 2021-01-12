@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import {PaymentRequestButtonElement, useStripe} from '@stripe/react-stripe-js';
 import local from './local';
+import googleIcon from './images/google.png';
+import appleIcon from './images/apple.jpg';
 
 const GooglePay = ({ clientSecret }) => {
   const [lang] = useState('en')
   const stripe = useStripe();
   const [paymentRequest, setPaymentRequest] = useState(null);
-  const [isShowButton, setIsShowButton] = useState(false);
-  const [isAppleButton, setIsAppleButton] = useState(false)
+  const [isShowButton, setIsShowButton] = useState(true);
+  const [isAppleButton, setIsAppleButton] = useState(true)
 
   const handleClick = (paymentRequest) => paymentRequest.show();
 
@@ -83,22 +85,28 @@ const GooglePay = ({ clientSecret }) => {
     }
   }, [paymentRequest]) 
 
-  if (paymentRequest) {
+  // if (paymentRequest) {
     return (
       <div className='apple-pay-button-container'>
-        <button onClick={() => handleClick(paymentRequest)} className={isShowButton ? 'google-button inline-block' : 'disp-none'}>
-          <span className="default">
-              <i className="fas fa-lg fa-credit-card"></i>
-              Pay Now
-          </span>
-          <span className="applepay ml-4 mr-4" style={{display: 'none'}}>
-              <span className="fa-lg">
-                  <i className="fab fa-apple-pay" data-fa-transform="grow-12"></i>
-              </span>
-              <span className="sr-only">Purchase with Apple Pay</span>
-          </span>
-      </button>
-      {/* <PaymentRequestButtonElement options={{...options, paymentRequest}} /> */}
+        {
+          isAppleButton
+            ? (
+                <button onClick={() => handleClick(paymentRequest)} className={isShowButton ? 'google-button inline-block' : 'disp-none'}>
+                  <span className="default">
+                      <img alt='google-icon' className='google-apple-button-icon' src={appleIcon}></img>
+                  </span>
+                  <span>Pay</span>
+                </button>
+              )
+            : (
+              <button onClick={() => handleClick(paymentRequest)} className={isShowButton ? 'google-button inline-block' : 'disp-none'}>
+                <span className="default">
+                    <img alt='apple-icon' className='google-apple-button-icon' src={googleIcon}></img>
+                </span>
+                <span>Pay</span>
+              </button>
+            )  
+        }
       <div className='content-divider'>
         <div className='flex-setting divider-line'></div>
         <div className='flex-setting'>{local[lang].dividerText}</div>
@@ -106,7 +114,7 @@ const GooglePay = ({ clientSecret }) => {
       </div>
       </div>
     )  
-  }
+  // }
 
   // Use a traditional checkout form.
   return 'Google pay is not working';

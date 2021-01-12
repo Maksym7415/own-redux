@@ -56,12 +56,15 @@ p {
 
 .divider-line {
   border-bottom: 0.5px solid grey;
-  height: 12px;
+  height: 14px;
 }
 
 .google-button {
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: #3a3434;
   height: 44px;
   width: 100%;
@@ -77,6 +80,12 @@ p {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   transform: translateZ(0);
+}
+
+.google-apple-button-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
 }
 
 /* CHECKOUT FORM STYLES */
