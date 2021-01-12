@@ -50,7 +50,7 @@ function CheckoutForm({ clientSecret }) {
       if (result.error) {
         // Show error to your customer (e.g., insufficient funds)
         console.log('error', result.error)
-        setIsDisabled(false);
+        return setIsDisabled(false);
       };
       console.log('success');
       setBillingDetails(defaultState);
