@@ -11,7 +11,7 @@ function Stripe() {
   const [clientSecret, setClientSecret] = useState();
 
   useEffect(() => {
-    const url = 'https://eat-beat/sandbox/apple-pay-create-session'
+    const url = 'https://eat-beat.hopto.org/sandbox/apple-pay-create-session'
     const body = JSON.stringify({
       currency: 'usd',
       amount: 200,
