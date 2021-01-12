@@ -28,26 +28,9 @@ const GooglePay = ({ clientSecret }) => {
     }
   }, [stripe]);
 
-  // useEffect(() => {
-  //   const url = 'http://localhost:8000/create-session'
-  //   const body = JSON.stringify({
-  //     currency: 'usd',
-  //     amount: 200,
-  //   })
-  //   fetch(url, { 
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body
-  //   })
-  //     .then((res) => res.json)
-  //     .then((res) => setClientSecret(res.clientSecret))
-  //     .catch((err) => console.log(err));
-  // }, []);
-
   useEffect(() => {
     if (paymentRequest) {
+      console.log('paymentrequest')
       paymentRequest.on('paymentmethod', async (ev) => {
         // Confirm the PaymentIntent without handling potential next actions (yet).
         const {paymentIntent, error: confirmError} = await stripe.confirmCardPayment(
@@ -55,7 +38,7 @@ const GooglePay = ({ clientSecret }) => {
           {payment_method: ev.paymentMethod.id},
           {handleActions: false}
         );
-      
+      console.log('pr on event', paymentIntent, confirmError)
         if (confirmError) {
           // Report to the browser that the payment failed, prompting it to
           // re-show the payment interface, or show an error message and close
