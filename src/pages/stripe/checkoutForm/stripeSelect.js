@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import BotArrow from './bottomArrow';
+import BottomArrow from '../images/bottomArrow.svg'
 
 export default function StripeSelect({ data, label, value, onChange }) {
 
@@ -26,18 +26,21 @@ export default function StripeSelect({ data, label, value, onChange }) {
     }, [show])
 
     return (
-        <div style={{position: 'relative'}}>
-            <label style={{color: 'rgba(26,26,26,.7)', fontWeight: 500, fontSize: '13px'}}>
+        <div className='relative'>
+            <label className='card-label-text'>
                 {label}
             </label>
             <div className='StripeElementCustom' >
                 <div style={{padding: '3px'}}>
                     <div onClick={open} style={{display: 'flex', justifyContent: data.find((el) => el.code === value)?.name ? 'space-between' : 'flex-end'}}>
                     <span style={{fontSize: '13px'}}>{data.find((el) => el.code === value)?.name}</span>
-                        <BotArrow/>
+                    <img
+                        alt='arrow'
+                        src={BottomArrow}
+                    />
                     </div>
                 </div>
-                {show && <div onBlur={blurHandler} style={{width: '100%', maxHeight: '300px', overflow: 'auto', position: 'absolute', zIndex: 100, backgroundColor: '#fff', bottom: '40px', outline: 'none', border: '0.5px solid #80808099'}} tabIndex={1} ref={ref}>
+                {show && <div className='country-options-container' onBlur={blurHandler} tabIndex={1} ref={ref}>
                     <div  style={{padding: '0px 0px 0px 12px'}}>
                         {data.map(({ code, name }) => <p key={code} className='country' onClick={() => getCountry(code)}>{name}</p>)}
                     </div>
