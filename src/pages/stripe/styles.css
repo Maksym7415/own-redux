@@ -15,7 +15,8 @@ p {
 }
 
 .mainContainer {
-  width: 400px;
+  max-width: 400px;
+  min-width: 300px;
   display: flex;
   margin: 50px auto;
   flex-direction: column;
@@ -35,7 +36,7 @@ p {
 
 /* PAYMENT REQUEST BUTTON STYLES */
 .apple-pay-button-container {
-  width: 380px;
+  width: 100%;
   padding: 8px;
 }
 
@@ -109,7 +110,7 @@ p {
 
 /* CHECKOUT FORM STYLES */
 .checkout-form-container {
-  width: 380px;
+  width: 100%;
 }
 
 .card-info-label {
